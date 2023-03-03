@@ -11,10 +11,5 @@ jobs:
         uses: ./.github/actions
         with:
           who-to-greet: 'Mona the Octocat'
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
