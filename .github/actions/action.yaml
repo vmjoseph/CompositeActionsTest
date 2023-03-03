@@ -21,7 +21,4 @@ runs:
       shell: bash
     - run: goodbye.sh
       shell: bash
-    - uses: actions/setup-node@v3
-      with:
-        node-version: "16"
     
