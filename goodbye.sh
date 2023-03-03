@@ -1,1 +1,0 @@
-echo "composite action test"
