@@ -19,7 +19,7 @@ jobs:
             dd if=/dev/urandom of=artifact bs=1M count=500
             dd if=/dev/zero of=artifact-unsigned bs=1M count=1
         - name: upload artifact
-          uses: actions/upload-artifact@v4
+          uses: vmjoseph/upload-artifact@main
           with:
             name: urandom
             compression-level: 0
