@@ -1,0 +1,49 @@
+---
+title: "Radar Issue {{ date | date('dddd, MMMM Do') }}"
+labels: radar
+---
+
+<% if local_previous_radar_issues && !local_previous_radar_issues.empty? %>
+*[Previously](<%= local_previous_radar_issues.first["url"] %>).*
+<% end %>
+
+## Oncall
+
+Generally, @<%= local_on_call_engineer %> is on-call today.
+
+
+## New/Updated and Unacknowledged Issues
+
+| URL | Title | Status | Assignee |
+| :--- | :--- | :--- | :--- |
+<% local_new_issues.each do |issue| %>
+| <%= issue["url"] %>| <%= issue["title"] %> | <%= issue["state"] %> | <%= issue["assignees"].join(", ") %> |
+<% end %>
+
+## New/Updated and Unacknowledged PRs
+
+| URL | Title | Status | Assignee |
+| :--- | :--- | :--- | :--- |
+<% local_new_prs.each do |pr| %>
+| <%= pr["url"] %>| <%= pr["title"] %> | <%= pr["state"] %> | <%= pr["assignees"].join(", ") %> |
+<% end %>
+
+## Open Nines Issues
+
+| URL | Title | Assignee |
+| :--- | :--- | :--- |
+<% local_open_alert_issues.each do |issue| %>
+| <%= issue["url"] %>| <%= issue["title"] %> | <%= issue["assignees"].join(", ") %> |
+<% end %>
+
+<% if local_oldest_ten_issues && !local_oldest_ten_issues.empty? %>
+
+## Oldest Ten Issues
+
+| URL | Title | Assignee |
+| :--- | :--- | :--- |
+<% local_oldest_ten_issues.each do |issue| %>
+| <%= issue["url"] %>| <%= issue["title"] %> | <%= issue["assignees"].join(", ") %> |
+<% end %>
+
+<% end %>
