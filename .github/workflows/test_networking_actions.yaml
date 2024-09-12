@@ -11,7 +11,14 @@ jobs:
         id: compile-issue-template
         uses: github/render-template@v0.0.5
         with:
-          filename: "./.github/RADAR_ISSUE_TEMPLATE.md.erb"
+          filename: "./RADAR_ISSUE_TEMPLATE.md.erb"
+        env:
+          local_schedule_entries: ${{ steps.get-on-call.outputs.schedule_entries }}
+          local_new_issues: ${{ steps.get-new-issues.outputs.issues }}
+          local_oldest_ten_issues: ${{ steps.get-oldest-ten-issues.outputs.issues }}
+          local_new_prs: ${{ steps.get-new-prs.outputs.issues }}
+          local_open_alert_issues: ${{ steps.get-open-alert-issues.outputs.issues }}
+          local_vuln_mgmt_issues: ${{ steps.get-vuln-mgmt-issues.outputs.issues }}
       - name: Create issue
         uses: JasonEtco/create-an-issue@1b14a70e4d8dc185e5cc76d3bec9eab20257b2c5 #v2.9.2
         env:
