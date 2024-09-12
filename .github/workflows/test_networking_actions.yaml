@@ -5,7 +5,7 @@ on:
 jobs:
   generate-daily-radar-issue:
     name:  generate daily radar issue
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Compile issue template
         id: compile-issue-template
