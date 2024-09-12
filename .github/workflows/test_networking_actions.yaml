@@ -1,0 +1,22 @@
+name: Test Networking Action Upgrades
+on:
+  workflow_dispatch
+  
+jobs:
+  generate-daily-radar-issue:
+    name:  generate daily radar issue
+    runs-on: self-hosted
+    steps:
+      - name: Compile issue template
+        id: compile-issue-template
+        uses: github/render-template@v0.0.5
+        with:
+          filename: "./.github/RADAR_ISSUE_TEMPLATE.md.erb"
+      - name: Create issue
+        uses: JasonEtco/create-an-issue@1b14a70e4d8dc185e5cc76d3bec9eab20257b2c5 #v2.9.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: ${{ steps.compile-issue-template.outputs.compiled_file_dest }}
+          assignees: "${{ steps.get-on-call.outputs.primary_oncall_engineer }}"
+       
